@@ -38,7 +38,6 @@ module RFC822
     ADDRESS   = compile "#{LOCAL_PT}\\x40#{DOMAIN}"
     NON_LOCAL_ADDRESS   = compile "#{LOCAL_PT}\\x40#{DOMAIN_PT}(\\x2e#{DOMAIN_PT})+"
   end
-
   EmailAddress = /\A#{Patterns::ADDRESS}\z/
   NonLocalEmailAddress = /\A#{Patterns::NON_LOCAL_ADDRESS}\z/
 end
@@ -55,7 +54,8 @@ end
 # submitting a patch to massively simplify this code and thereby instruct me
 # in the ways of Rails too! I reflowed the patch a little to keep the line
 # length to a maximum of 78 characters, an old habit.
-module ActiveModel
+
+module ActiveRecord
   module Validations
     module ClassMethods
       def validates_as_email(*attr_names)
