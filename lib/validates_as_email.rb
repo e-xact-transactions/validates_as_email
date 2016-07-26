@@ -43,7 +43,7 @@ module RFC822
   NonLocalEmailAddress = /\A#{Patterns::NON_LOCAL_ADDRESS}\z/
 end
 
-# Validation helper for ActiveRecord derived objects that cleanly and simply
+# Validation helper for ActiveModel derived objects that cleanly and simply
 # allows the model to check if the given string is a syntactically valid email
 # address (by using the RFC822 module above).
 #
@@ -57,7 +57,7 @@ end
 # length to a maximum of 78 characters, an old habit.
 module ActiveModel
   module Validations
-    module ClassMethods
+    module HelperMethods
       def validates_as_email(*attr_names)
         options = attr_names.pop if attr_names.last.is_a?(Hash)
         restrict_domain = options.delete(:restrict_domain) if options
