@@ -36,6 +36,8 @@ class ValidatesAsEmailTest < Test::Unit::TestCase
     addresses = [
       'test@example',
       'test@example.com', 
+      '  test@example.com   ',
+      'one.two.three@example.com.au', 
       'test@example.co.uk',
       '"J. P. \'s-Gravezande, a.k.a. The Hacker!"@example.com',
       'me@[187.223.45.119]',

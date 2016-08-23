@@ -57,6 +57,14 @@ end
 # length to a maximum of 78 characters, an old habit.
 module ActiveModel
   module Validations
+
+    class StrippedFormatValidator < FormatValidator # :nodoc:
+      def validate_each(record, attribute, value)
+        value.to_s.strip! if options[:stripped]
+        super
+      end
+    end
+
     module HelperMethods
       def validates_as_email(*attr_names)
         options = attr_names.pop if attr_names.last.is_a?(Hash)
@@ -64,10 +72,12 @@ module ActiveModel
         configuration = {
           :message   => (I18n.translate(:'activerecord.errors.messages.invalid_email', :raise => true) rescue 'is an invalid email'),
           :with      => restrict_domain ? RFC822::NonLocalEmailAddress : RFC822::EmailAddress,
-          :allow_nil => false }
+          :allow_nil => false,
+          :stripped  => true
+        }
         configuration.update(options) if options
 
-        validates_format_of attr_names, configuration
+        validates_with StrippedFormatValidator, _merge_attributes([attr_names, configuration])
       end
     end
   end
