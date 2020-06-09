@@ -18,6 +18,4 @@ Gem::Specification.new do |s|
   s.test_files = ['test/validates_as_email_test.rb']
 
   s.add_runtime_dependency 'activemodel', '>= 3.2'
-
-  s.has_rdoc = false
 end
